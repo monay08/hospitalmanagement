@@ -2,8 +2,6 @@ from django import forms
 from django.contrib.auth.models import User
 from . import models
 
-
-
 #for admin signup
 class AdminSigupForm(forms.ModelForm):
     class Meta:
@@ -12,7 +10,6 @@ class AdminSigupForm(forms.ModelForm):
         widgets = {
         'password': forms.PasswordInput()
         }
-
 
 #for student related form
 class DoctorUserForm(forms.ModelForm):
@@ -27,8 +24,6 @@ class DoctorForm(forms.ModelForm):
         model=models.Doctor
         fields=['address','mobile','department','status','profile_pic']
 
-
-
 #for teacher related form
 class PatientUserForm(forms.ModelForm):
     class Meta:
@@ -37,6 +32,7 @@ class PatientUserForm(forms.ModelForm):
         widgets = {
         'password': forms.PasswordInput()
         }
+
 class PatientForm(forms.ModelForm):
     #this is the extrafield for linking patient and their assigend doctor
     #this will show dropdown __str__ method doctor model is shown on html so override it
@@ -45,8 +41,6 @@ class PatientForm(forms.ModelForm):
     class Meta:
         model=models.Patient
         fields=['address','mobile','status','symptoms','profile_pic']
-
-
 
 class AppointmentForm(forms.ModelForm):
     doctorId=forms.ModelChoiceField(queryset=models.Doctor.objects.all().filter(status=True),empty_label="Doctor Name and Department", to_field_name="user_id")
@@ -62,15 +56,8 @@ class PatientAppointmentForm(forms.ModelForm):
         model=models.Appointment
         fields=['description','status']
 
-
 #for contact us page
 class ContactusForm(forms.Form):
     Name = forms.CharField(max_length=30)
     Email = forms.EmailField()
     Message = forms.CharField(max_length=500,widget=forms.Textarea(attrs={'rows': 3, 'cols': 30}))
-
-
-
-#Developed By : sumit kumar
-#facebook : fb.com/sumit.luv
-#Youtube :youtube.com/lazycoders
